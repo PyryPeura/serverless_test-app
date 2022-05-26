@@ -3,6 +3,9 @@ const require = topLevelCreateRequire(import.meta.url)
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
+// stacks/ApiStack.js
+import { Api, use } from "@serverless-stack/resources";
+
 // stacks/StorageStack.js
 import { Bucket, Table } from "@serverless-stack/resources";
 function StorageStack({ stack, app }) {
@@ -21,6 +24,34 @@ function StorageStack({ stack, app }) {
 }
 __name(StorageStack, "StorageStack");
 
+// stacks/ApiStack.js
+function ApiStack({ stack, app }) {
+  const { table } = use(StorageStack);
+  const api = new Api(stack, "Api", {
+    defaults: {
+      function: {
+        permissions: [table],
+        environment: {
+          TABLE_NAME: table.tableName
+        }
+      }
+    },
+    routes: {
+      "POST /notes": "functions/create.main",
+      "GET /notes/{id}": "functions/get.main",
+      "GET /notes": "functions/list.main",
+      "PUT /notes/{id}": "functions/update.main"
+    }
+  });
+  stack.addOutputs({
+    ApiEndpoint: api.url
+  });
+  return {
+    api
+  };
+}
+__name(ApiStack, "ApiStack");
+
 // stacks/index.js
 function main(app) {
   app.setDefaultFunctionProps({
@@ -30,7 +61,7 @@ function main(app) {
       format: "esm"
     }
   });
-  app.stack(StorageStack);
+  app.stack(StorageStack).stack(ApiStack);
 }
 __name(main, "main");
 export {
