@@ -7,19 +7,19 @@
         "file": "tree.json"
       }
     },
-    "admin-notes-MyStack.assets": {
+    "admin-notes-StorageStack.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "admin-notes-MyStack.assets.json",
+        "file": "admin-notes-StorageStack.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "admin-notes-MyStack": {
+    "admin-notes-StorageStack": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://775155028887/us-east-1",
       "properties": {
-        "templateFile": "admin-notes-MyStack.template.json",
+        "templateFile": "admin-notes-StorageStack.template.json",
         "tags": {
           "sst:app": "notes",
           "sst:stage": "admin"
@@ -27,11 +27,11 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::775155028887:role/cdk-hnb659fds-deploy-role-775155028887-us-east-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::775155028887:role/cdk-hnb659fds-cfn-exec-role-775155028887-us-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-775155028887-us-east-1/c0f04e384a635e928f7449fb1d22507107cdd4369a9d426a6eab7d7c24e55842.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-775155028887-us-east-1/7fb81eec247acc50782099916cd05432cd1dd70d25dd791e273f7863f873cc61.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "admin-notes-MyStack.assets"
+          "admin-notes-StorageStack.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::775155028887:role/cdk-hnb659fds-lookup-role-775155028887-us-east-1",
@@ -40,10 +40,10 @@
         }
       },
       "dependencies": [
-        "admin-notes-MyStack.assets"
+        "admin-notes-StorageStack.assets"
       ],
       "metadata": {
-        "/admin-notes-MyStack": [
+        "/admin-notes-StorageStack": [
           {
             "type": "aws:cdk:stack-tags",
             "data": [
@@ -58,92 +58,46 @@
             ]
           }
         ],
-        "/admin-notes-MyStack/SSTMetadata": [
+        "/admin-notes-StorageStack/SSTMetadata": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SSTMetadata"
           }
         ],
-        "/admin-notes-MyStack/Api/Api/Resource": [
+        "/admin-notes-StorageStack/Notes/Table": [
           {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiCD79AAA0"
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "NotesTable7100B0E8"
+            }
           }
         ],
-        "/admin-notes-MyStack/Api/Api/DefaultStage/Resource": [
+        "/admin-notes-StorageStack/Notes/Table/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ApiDefaultStage1AAE989B"
+            "data": "NotesTable7100B0E8"
           }
         ],
-        "/admin-notes-MyStack/Api/LogGroup/Resource": [
+        "/admin-notes-StorageStack/Uploads/Bucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ApiLogGroup1717FE17"
+            "data": "UploadsBucketC4B27CC7"
           }
         ],
-        "/admin-notes-MyStack/Api/Lambda_GET_--/ServiceRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiLambdaGETServiceRole210B6205"
-          }
-        ],
-        "/admin-notes-MyStack/Api/Lambda_GET_--/ServiceRole/DefaultPolicy/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiLambdaGETServiceRoleDefaultPolicy013A8DEA"
-          }
-        ],
-        "/admin-notes-MyStack/Api/Lambda_GET_--/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiLambdaGETB1714EF3"
-          }
-        ],
-        "/admin-notes-MyStack/Api/Lambda_GET_--/EventInvokeConfig/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiLambdaGETEventInvokeConfig1B7345F6"
-          }
-        ],
-        "/admin-notes-MyStack/Api/Route_GET_--/Integration_GET_--/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiRouteGETIntegrationGET10DCD122"
-          }
-        ],
-        "/admin-notes-MyStack/Api/Route_GET_--/Integration_GET_---Permission": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiRouteGETIntegrationGETPermission3C1F1A50"
-          }
-        ],
-        "/admin-notes-MyStack/Api/Route_GET_--/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiRouteGET8AC7D3F8"
-          }
-        ],
-        "/admin-notes-MyStack/ApiEndpoint": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiEndpoint"
-          }
-        ],
-        "/admin-notes-MyStack/BootstrapVersion": [
+        "/admin-notes-StorageStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/admin-notes-MyStack/CheckBootstrapVersion": [
+        "/admin-notes-StorageStack/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "admin-notes-MyStack"
+      "displayName": "admin-notes-StorageStack"
     }
   }
 }

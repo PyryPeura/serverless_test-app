@@ -3,23 +3,26 @@ const require = topLevelCreateRequire(import.meta.url)
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
-// stacks/MyStack.js
-import { Api } from "@serverless-stack/resources";
-function MyStack({ stack }) {
-  const api = new Api(stack, "Api", {
-    routes: {
-      "GET /": "functions/lambda.handler"
-    }
+// stacks/StorageStack.js
+import { Bucket, Table } from "@serverless-stack/resources";
+function StorageStack({ stack, app }) {
+  const table = new Table(stack, "Notes", {
+    fields: {
+      userId: "string",
+      noteId: "string"
+    },
+    primaryIndex: { partitionKey: "userId", sortKey: "noteId" }
   });
-  stack.addOutputs({
-    ApiEndpoint: api.url
-  });
+  const bucket = new Bucket(stack, "Uploads");
+  return {
+    table,
+    bucket
+  };
 }
-__name(MyStack, "MyStack");
+__name(StorageStack, "StorageStack");
 
 // stacks/index.js
-import { App } from "@serverless-stack/resources";
-function stacks_default(app) {
+function main(app) {
   app.setDefaultFunctionProps({
     runtime: "nodejs16.x",
     srcPath: "backend",
@@ -27,10 +30,10 @@ function stacks_default(app) {
       format: "esm"
     }
   });
-  app.stack(MyStack);
+  app.stack(StorageStack);
 }
-__name(stacks_default, "default");
+__name(main, "main");
 export {
-  stacks_default as default
+  main as default
 };
 //# sourceMappingURL=index.js.map
